@@ -30,7 +30,7 @@ func _ready():
 
 
 # CallBack at each update // delta: time passed since last update
-func _physics_process(delta):
+func _process(delta):
 	
 	# Point to function after checking the sate
 	match state:
