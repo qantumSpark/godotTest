@@ -12,9 +12,11 @@ enum {
 	ATTACK
 }
 
+# "STATS"
 var isOnRoad = false
 var state = MOVE
 var roll_vector = Vector2.DOWN
+var knockback = 50
 
 # Init mouvement Vector
 var velocity = Vector2.ZERO
@@ -23,10 +25,12 @@ var velocity = Vector2.ZERO
 onready var animationPlayer = $AnimationPlayer
 onready var animationTree = $AnimationTree
 onready var animationState = animationTree.get("parameters/playback")
+onready var swordHitbox = $HitboxPivot/SwordHitbox
 
 # Wait for player to be loaded before starting the animation
 func _ready():
 	animationTree.active = true
+	swordHitbox.knockback_vector = roll_vector
 
 
 # CallBack at each update // delta: time passed since last update
@@ -70,6 +74,7 @@ func move_state(delta):
 		#If Moving
 	if input_vector != Vector2.ZERO:
 		roll_vector = input_vector
+		swordHitbox.knockback_vector = input_vector
 		#Define Animation With Animation State and vector direction
 		animationTree.set("parameters/Idle/blend_position", input_vector)
 		animationTree.set("parameters/Run/blend_position", input_vector)
@@ -77,7 +82,7 @@ func move_state(delta):
 		animationTree.set("parameters/Roll/blend_position", input_vector)
 		animationState.travel("Run")
 		
-		#Update position following the input vector
+		#Update velocity and direction following the input vector
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta)
 		
 		#No input, player come to a stop
@@ -106,11 +111,10 @@ func attack_state(delta):
 	velocity = Vector2.ZERO
 	animationState.travel("Attack")
 
+# Methods call by the animation with signals
 
 func roll_animation_finished():
-	#velocity = Vector2.ZERO
 	state = MOVE
-
 
 func attack_animation_finished():
 	state = MOVE
