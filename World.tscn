@@ -520,7 +520,7 @@ collision_layer = 2147483649
 script = ExtResource( 7 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="tiles/DirtPathTileMap/OnRoadDetection"]
-polygon = PoolVector2Array( 191, -15, 192, 32, 205, 32, 208, 48, 216, 48, 224, 48, 224, 64, 240, 64, 240, 80, 350, 81, 350, 112, 224, 112, 224, 144, 64, 144, 64, 160, 48, 160, 48, 192, 16, 192, 16, 144, 32, 144, 32, 128, 48, 128, 48, 112, 192, 112, 192, 80, 176, 80, 176, 64, 160, 64, 160, -15 )
+polygon = PoolVector2Array( 191, -15, 192, 32, 205, 32, 208, 48, 216, 48, 224, 48, 224, 64, 240, 64, 240, 80, 350, 81, 350, 112, 224, 112, 224, 96, 208, 96, 208, 80, 192, 80, 176, 80, 176, 64, 160, 64, 160, -15 )
 
 [node name="DirtCliffTileMap" type="TileMap" parent="tiles"]
 tile_set = SubResource( 50 )
